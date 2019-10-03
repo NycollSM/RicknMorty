@@ -17,10 +17,10 @@ class Card extends React.Component {
       .then( resp => resp.json())
         .then(data => {
           var i = data._embedded.episodes;
-         // var desct = data._embedded.episodes.summary;
-          //console.log(desct);
-          console.log(i.name);
-          //i.forEach(element => console.log(element));
+          i.map(element => 
+            
+            
+            console.log('elements', element.id, element.name, element.image));
           // console.log (e);
           var cardEpisd = i.map((name, desc, image) => <div>Episode</div>)
           //console.log(cardEpisd);
