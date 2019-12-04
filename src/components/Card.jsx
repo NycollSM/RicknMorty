@@ -12,7 +12,6 @@ class Card extends Component {
     this.ToggleButton = this.ToggleButton.bind(this);
   }
   
-
   componentDidMount() {
     axios.get(`https://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes`)
       .then(res => {
@@ -28,18 +27,27 @@ class Card extends Component {
         favorite: !currentState.favorite, 
     }));
   }
+
+  renderCards() {
+    let component = this.state.info.map(item => {
+      if(item.image) {
+        return (
+          <div className="cards" key={item.id}>            
+            <img src={item.image.medium} alt=""/>
+            <p>{item.name}</p>
+            <p>{item.summary}</p>
+            <button element={this.state.favorite === item.id} className={this.state.favorite ? 'start-green' : 'start'} onClick={this.ToggleButton}>Favorite</button>
+          </div>
+        )
+      }
+    })
+    return component;
+  }
+
   render() {
     return (
       <div className="wrapper-cards">
-        { this.state.info.map(item =>
-        
-          <div className="cards" key={item.id}>
-            <p>{item.name}</p>
-            <p>{item.summary}</p>
-            <img src={item.image} alt=""/>
-            <button element={this.state.favorite === item.id} className={this.state.favorite ? 'start-green' : 'start'} onClick={this.ToggleButton}>Favorite</button>
-          </div>
-        )}
+        { this.renderCards() }
       </div>
     )
   }

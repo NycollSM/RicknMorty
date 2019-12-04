@@ -6,7 +6,6 @@ import axios from 'axios';
 
 
 class App extends Component {
-  //selectedId =(props)=> props.selectedId;
   getSearch = (e) => {
     e.preventDefault();
     const episode = e.target.searching.value;
